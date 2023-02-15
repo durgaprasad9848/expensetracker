@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+ import React, { useContext } from "react";
 
+
+ import {
+  BrowserRouter,
+  Routes,
+  Route,
+  createBrowserRouter,
+} from "react-router-dom";
+import { Navbar } from "./pages/Navbar";
+import {Welcome} from "./pages/Welcome";
+import AuthForm from "./components/Auth/AuthForm";
+import ContextProvider from "./context/ContexProvider";
+
+import AuthContext from "./context/auth-contex";
 function App() {
+  const ctx = useContext(AuthContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  
+  <BrowserRouter>
+ <ContextProvider>
+   <Navbar/>
+  <Routes>
+   { !ctx.isLoggedIn && <Route path="/Login" element={<AuthForm />} /> }
+   { ctx.isLoggedIn && <Route path="/Welcome"  element = {<Welcome/>}/> }
+    
+  </Routes>
+  </ContextProvider>
+  </BrowserRouter>
+ 
   );
 }
 
