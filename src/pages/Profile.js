@@ -29,6 +29,11 @@ export const Profile = () => {
             {
                 setIncomplete(false);
             }
+            else{
+                name.current.value = "";
+            email.current.value = "";
+            phone.current.value = "";
+            }
          
           });
       };
