@@ -7,9 +7,11 @@ export const Profile = () => {
   const email = useRef(null);
   const phone = useRef(null);
   const navigate = useNavigate();
-  const [isIncomplete,setIncomplete] = useState(false);
+  const [isIncomplete,setIncomplete] = useState(true);
 
- useEffect(()=>{
+  
+   useEffect(()=>{
+
 
     const getDefaultProfile = async () => {
         let id = window.localStorage.getItem("email");
@@ -22,17 +24,19 @@ export const Profile = () => {
             email.current.value = data.email;
             phone.current.value = data.phone;
             console.log("fetched", data);
-            if(data.phone =="" || data.name =="" || data.email=="")
+         
+            if(data.phone.length>1 || data.name.length>1 || data.email.length>1)
             {
-                setIncomplete(true);
+                setIncomplete(false);
             }
          
           });
       };
       getDefaultProfile();
 
-
- },[isIncomplete]);
+   },[isIncomplete])
+   
+ 
   
 
 
@@ -56,9 +60,9 @@ export const Profile = () => {
         },
       }
     );
-    setIncomplete((state)=>!state);
+  
     const result = await response.json();
-   
+    setIncomplete((state)=>!state);
     console.log("success",result);
   };
 

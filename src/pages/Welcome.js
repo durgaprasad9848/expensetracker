@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {NavLink} from 'react-router-dom';
 import {Card} from 'react-bootstrap';
 
 // import { auth } from 'firebase/app';
 // import 'firebase/auth';
-
+import AuthContext from "../context/auth-contex";
 
 export const Welcome = () => {
- 
+    
+    const ctx = useContext(AuthContext);
 
   //  const [verificationStatus, setVerificationStatus] = useState(null);
     // const [pstate,setpstate] = useState("");
@@ -69,8 +70,15 @@ export const Welcome = () => {
     <div>
       <Card>
         <center><h1>Welcome to Expense Tracker </h1></center>
+        <div>
+        <NavLink to ="/Welcome"><button> Home </button> </NavLink>
         <NavLink to ="/Profile"><button> user profile </button> </NavLink>
+        <button onClick={()=>ctx.removeToken()}>Logout</button>
+        </div>
+        <div>
         <button onClick={emailverify}>Verify email</button>
+        </div>
+        
    
         
       </Card>

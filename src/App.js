@@ -25,7 +25,7 @@ function App() {
   <Routes>
    { !ctx.isLoggedIn && <Route path="/Login" element={<AuthForm />} /> }
    { ctx.isLoggedIn && <Route path ="Welcome" element={<Welcome/>}/>   }
-   <Route path="/Profile"  element = {<Profile/>}/>
+     <Route path="/Profile"  element = {<Profile/>}/> 
   </Routes>
   </ContextProvider>
   </BrowserRouter>

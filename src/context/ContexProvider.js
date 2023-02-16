@@ -29,10 +29,10 @@ const ContextProvider = (props) => {
 
   const removeTokenHandler = () => {
     localStorage.removeItem("token");
-
+    localStorage.removeItem("email");
 
     setLoginToken(() => null);
-    navigate("/Login");
+     navigate("/");
   };
   const userIsLogggedIn = !!loginToken;
   console.log("islog", userIsLogggedIn);
