@@ -6,6 +6,7 @@ const AuthContext = createContext({
   storeToken: ()=>{},
   removeToken:()=>{},
   logout:()=>{},
+  
 
 });
 export default AuthContext;
