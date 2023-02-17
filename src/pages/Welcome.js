@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useRef, useEffect } from "react";
 import {NavLink} from 'react-router-dom';
 import {Card} from 'react-bootstrap';
 
@@ -7,9 +7,14 @@ import {Card} from 'react-bootstrap';
 import AuthContext from "../context/auth-contex";
 
 export const Welcome = () => {
+
+    const amount = useRef(null);
+    const disc = useRef(null);
+    const cat = useRef(null);
     
     const ctx = useContext(AuthContext);
-
+    
+    const[userdata,setData] = useState([]);
   //  const [verificationStatus, setVerificationStatus] = useState(null);
     // const [pstate,setpstate] = useState("");
     // var locstate = localStorage.getItem("pState");
@@ -19,6 +24,16 @@ export const Welcome = () => {
     // else{ 
     //     setpstate("is incomplete");
     // }
+     
+    const submithandler = (e) =>{
+       e.preventDefault();
+        const newdata = {amount:amount.current.value, disc: disc.current.value, cat: cat.current.value};
+         setData([...userdata,newdata]);
+        
+    
+    }
+
+   
 
     const emailverify = async() =>{
         const token = localStorage.getItem('token');
@@ -79,8 +94,36 @@ export const Welcome = () => {
         <button onClick={emailverify}>Verify email</button>
         </div>
         
-   
-        
+      </Card>
+      <Card>
+        <form>
+            <div>
+                <label>Money spend : </label>
+                <input type="text" ref={amount}></input>
+            </div>
+            <div>
+                <label>Money Description : </label>
+                <input type="text" ref={disc}></input>
+            </div>
+            <div>
+                <label>Category</label>
+                <select ref={cat}>
+                    <option value={"Food"}>Food</option>
+                    <option value={"Petrol"}>Petrol</option>
+                    <option value={"Travel"}>Traveling</option>
+                    <option value={"Movies"}>Movies</option>
+                </select>
+            </div>
+            <button onClick={submithandler}>Submit</button>
+        </form>
+
+
+        <ul> 
+        {userdata.map((person, index) => (
+          <li key={index}>{`${person.amount} - ${person.cat} - ${person.disc}`}</li>
+        ))}
+      </ul>
+     
       </Card>
     </div>
   );

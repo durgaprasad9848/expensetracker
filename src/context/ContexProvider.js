@@ -21,7 +21,7 @@ const ContextProvider = (props) => {
 
 
     
-    navigate('/welcome');
+    navigate('/Welcome');
     setLoginToken(() => {
       return idToken;
     });
