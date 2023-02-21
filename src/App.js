@@ -12,6 +12,7 @@ import {Welcome} from "./pages/Welcome";
 import { Profile } from "./pages/Profile";
 import AuthForm from "./components/Auth/AuthForm";
 import ContextProvider from "./context/ContexProvider";
+import {Expenses} from "./pages/Expenses";
 
 
 import AuthContext from "./context/auth-contex";
@@ -26,6 +27,7 @@ function App() {
    { !ctx.isLoggedIn && <Route path="/Login" element={<AuthForm />} /> }
    { ctx.isLoggedIn && <Route path ="Welcome" element={<Welcome/>}/>   }
      <Route path="/Profile"  element = {<Profile/>}/> 
+    <Route path ="/Expenses" element={<Expenses/>}/>
   </Routes>
   </ContextProvider>
   </BrowserRouter>

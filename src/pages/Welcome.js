@@ -1,6 +1,6 @@
 import React, { useContext, useState,useRef, useEffect } from "react";
 import {NavLink} from 'react-router-dom';
-import {Card} from 'react-bootstrap';
+import {Card, Nav} from 'react-bootstrap';
 
 // import { auth } from 'firebase/app';
 // import 'firebase/auth';
@@ -8,13 +8,24 @@ import AuthContext from "../context/auth-contex";
 
 export const Welcome = () => {
 
-    const amount = useRef(null);
-    const disc = useRef(null);
-    const cat = useRef(null);
+
     
     const ctx = useContext(AuthContext);
+
+        // async function temp(){
+        //     const data = await fetch("https://test-api-c7d27-default-rtdb.firebaseio.com/prasad.json")
+        //     .then((response) => response.json())
+        //     .then((data) => {
+            
+        //       console.log("fetched", data);
+        //     });
+        // }
+        // temp();
+  
+
+
     
-    const[userdata,setData] = useState([]);
+   
   //  const [verificationStatus, setVerificationStatus] = useState(null);
     // const [pstate,setpstate] = useState("");
     // var locstate = localStorage.getItem("pState");
@@ -24,14 +35,52 @@ export const Welcome = () => {
     // else{ 
     //     setpstate("is incomplete");
     // }
-     
-    const submithandler = (e) =>{
-       e.preventDefault();
-        const newdata = {amount:amount.current.value, disc: disc.current.value, cat: cat.current.value};
-         setData([...userdata,newdata]);
+
+
+   
+
+    // useEffect(()=>{
+
+
+      //     async function apple(){
+      //       console.log("HI");
         
+      //  //     const file = `${localStorage.getItem("email")}`;
+      //       const response = await fetch(
+      //         `https://test-api-c7d27-default-rtdb.firebaseio.com/prasad.json`,
+      //         {
+      //           method: "POST",
+      //           body: JSON.stringify(userdata),
+      //           headers: {
+      //             "Content-Type": "application/json",
+      //           },
+      //         }
+      //       );
+      //       const result = await response.json();
+
+
+      //       const data = await fetch("https://test-api-c7d27-default-rtdb.firebaseio.com/prasad.json")
+      //       .then((response) => response.json())
+      //       .then((data) => {
+            
+      //         console.log("fetched", data);
+      //       });
+
+
+      //       console.log(result);
+      //       }
+      //       apple();
+
+      //  setFetch(false);
+    //   console.log("hi",userdata);
+
+    // },[userdata]);
+
+ 
+
+
+     
     
-    }
 
    
 
@@ -88,6 +137,7 @@ export const Welcome = () => {
         <div>
         <NavLink to ="/Welcome"><button> Home </button> </NavLink>
         <NavLink to ="/Profile"><button> user profile </button> </NavLink>
+        <NavLink to ="/Expenses"><button>Expenses</button></NavLink>
         <button onClick={()=>ctx.removeToken()}>Logout</button>
         </div>
         <div>
@@ -95,36 +145,7 @@ export const Welcome = () => {
         </div>
         
       </Card>
-      <Card>
-        <form>
-            <div>
-                <label>Money spend : </label>
-                <input type="text" ref={amount}></input>
-            </div>
-            <div>
-                <label>Money Description : </label>
-                <input type="text" ref={disc}></input>
-            </div>
-            <div>
-                <label>Category</label>
-                <select ref={cat}>
-                    <option value={"Food"}>Food</option>
-                    <option value={"Petrol"}>Petrol</option>
-                    <option value={"Travel"}>Traveling</option>
-                    <option value={"Movies"}>Movies</option>
-                </select>
-            </div>
-            <button onClick={submithandler}>Submit</button>
-        </form>
-
-
-        <ul> 
-        {userdata.map((person, index) => (
-          <li key={index}>{`${person.amount} - ${person.cat} - ${person.disc}`}</li>
-        ))}
-      </ul>
-     
-      </Card>
+      
     </div>
   );
 };
