@@ -2,14 +2,13 @@ import React, { useEffect,useContext } from "react";
 import {NavLink} from 'react-router-dom';
 import AuthForm from "../components/Auth/AuthForm";
 import { Welcome } from "./Welcome";
-
-import AuthContext from "../context/auth-contex";
-
+ 
+import { useSelector } from "react-redux";
 
 export const Navbar = () =>{
-    const ctx = useContext(AuthContext);
-    console.log(ctx.isLoggedIn);
+    const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);
+ 
     return(<div>
-        {(ctx.isLoggedIn)?<Welcome/> :<AuthForm/> }
+        {(isAuthenticated)?<Welcome/> :<AuthForm/> }
     </div>);
 }

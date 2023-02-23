@@ -5,10 +5,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import authSlice from './components/redux/Auth';
+import expSlice from './components/redux/Exp';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store = configureStore({
+  reducer: {
+    auth: authSlice,
+    expenses: expSlice,
+  },
+});
+
+
+
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>
 );
 
