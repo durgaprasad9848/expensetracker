@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from "react-redux";
 // import 'firebase/auth';
 //import AuthContext from "../context/auth-contex";
 import { logout } from "../components/redux/Auth";
+ 
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ export const Welcome = () => {
   const navigate = useNavigate();
   const token = useSelector((state)=>state.auth.email);
   const dispatch = useDispatch();
-  
+
 
   const emailverify = async () => {
   //  const token = localStorage.getItem("token");
@@ -45,7 +46,7 @@ export const Welcome = () => {
 
   return (
     <div>
-      <Card>
+      
         <center>
           <h1>Welcome to Expense Tracker </h1>
         </center>
@@ -64,7 +65,7 @@ export const Welcome = () => {
         <div>
           <button onClick={emailverify}>Verify email</button>
         </div>
-      </Card>
+    
     </div>
   );
 };

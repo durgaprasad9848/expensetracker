@@ -4,7 +4,6 @@ const expSlice = createSlice({
   name: "expensedata",
   initialState: {
     data: null,
-    premium: false,
   },
   reducers: {
     update: (state, action) => {

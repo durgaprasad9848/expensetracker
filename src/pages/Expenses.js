@@ -4,17 +4,27 @@ import { Card } from "react-bootstrap";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { update } from "../components/redux/Exp";
+import { change, changetheme } from "../components/redux/prem";           //
 import { useDispatch } from "react-redux";
+import './Expcss.css';
+import { CSVLink } from 'react-csv';
+import CsvDownloadButton from "./CsvDownloadButton";
+
 export const Expenses = () => {
   const moneyRef = useRef();
   const descriptionRef = useRef();
   const categoryRef = useRef();
   const dispatch = useDispatch();
   const [prem, setPrem] = useState(false);
+
   const email = useSelector((state) => state.auth.email);
   const reduxdata = null;
 
   const data = useSelector((state) => state.expenses.data);
+  const redxprem = useSelector((state)=>state.prem.premium);  //
+
+
+
 
   useEffect(() => {
     fetchData();
@@ -43,6 +53,41 @@ export const Expenses = () => {
         console.log(error);
       });
   };
+
+  const activateprem = () =>{
+  
+    dispatch(change(true));
+  }
+
+  const toggletheme = () =>{
+    dispatch(changetheme());
+  }
+
+
+
+
+ 
+                                                          /////////////////////////////
+
+  const handledownload =  (e)=>{
+    e.preventDefault();
+    const headers = [
+        { label: "Category", key: "category" },
+        { label: "Description", key: "description" },
+        { label: "Money", key: "money" }
+      ];
+      
+      const csvData = Object.values(data).map(item => ({
+        category: item.category,
+        description: item.description,
+        money: item.money
+      }));
+      console.log(csvData);
+
+  }
+
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -112,8 +157,30 @@ export const Expenses = () => {
           </select>
         </label>
         <button type="submit">Submit</button>
+
+        
+
       </form>
-      {prem && <button> premium</button>}
+
+
+      
+      
+      {prem && <button onClick={activateprem}> premium</button>}
+      {prem && <div className="toggle-switch">
+        
+        <input type="checkbox" id="mode-toggle" onClick={toggletheme}  />
+        <label htmlFor="mode-toggle" className="toggle-slider" ></label>
+      </div>}
+
+
+
+  
+
+      {prem && <CsvDownloadButton/> }
+      
+      
+      
+
       <ul>
         {data &&
           Object.keys(data).map((key) => (
