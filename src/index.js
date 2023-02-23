@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import authSlice from './components/redux/Auth';
 import expSlice from './components/redux/Exp';
+import premSlice from './components/redux/prem';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -17,6 +18,7 @@ const store = configureStore({
   reducer: {
     auth: authSlice,
     expenses: expSlice,
+    prem:premSlice,
   },
 });
 
@@ -25,7 +27,7 @@ const store = configureStore({
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+    <App  />
     </Provider>
   </React.StrictMode>
 );
