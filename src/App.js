@@ -16,15 +16,16 @@ import { useSelector } from "react-redux";
  
 import './App.css';
 
-//import AuthContext from "./context/auth-contex";
+
 function App() {
-//  const ctx = useContext(AuthContext);
+
 const istheme = useSelector((state)=>state.prem.theme);
-console.log("app",istheme);
+ 
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);
   return (
     <BrowserRouter>
       <div className={istheme ? 'dark-theme' : ''}> 
+      <h>display page</h>
         <Navbar />
         <Routes>
           {!isAuthenticated && <Route path="/Login" element={<AuthForm />} />}
